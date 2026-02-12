@@ -26,12 +26,13 @@ SECRET_KEY = 'django-insecure-*eg1)xm0k86=lg6(2cgbdl(6mr(1t%&gqb=!qz4#f7=yk+-hsw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 APPEND_SLASH = True
-ALLOWED_HOSTS = ['ai-project-1-7l2t.onrender.com', 'localhost', '127.0.0.1', '*'']
+ALLOWED_HOSTS = ['ai-project-1-7l2t.onrender.com', 'localhost', '127.0.0.1', '*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
