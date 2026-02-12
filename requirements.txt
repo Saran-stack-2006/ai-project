@@ -3,4 +3,5 @@ plotly==5.22.0
 python-dotenv==1.0.0
 gunicorn==22.0.0
 pandas>=2.3.3
+whitenoise==6.6.0
 
