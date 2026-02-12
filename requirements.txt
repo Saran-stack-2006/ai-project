@@ -1,0 +1,5 @@
+Django==5.1.6
+pandas==2.2.2
+plotly==5.22.0
+python-dotenv==1.0.0
+gunicorn==22.0.0

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Data Analyst</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: Arial; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .upload-area { border: 2px dashed #007bff; padding: 40px; text-align: center; }
+        .voice-btn { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; }
+        .result { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>🎯 AI Data Analyst - Upload & Query Your Data</h1>
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="upload-area">
+            <input type="file" name="file" accept=".csv,.xlsx,.json" style="display: block; margin: 20px auto;">
+            <button type="submit" style="background: #007bff; color: white; border: none; padding: 12px 30px; border-radius: 25px;">Upload Dataset</button>
+        </div>
+        
+        {% if has_file %}
+        <div style="margin: 30px 0;">
+            <input type="text" name="query" id="queryInput" placeholder="Ask anything about your data... (e.g., 'show sales by region')" style="width: 70%; padding: 12px; font-size: 16px;">
+            <button type="submit" style="background: #28a745; color: white; border: none; padding: 12px 20px;">Analyze</button>
+            <button type="button" class="voice-btn" onclick="startVoice()">🎤 Voice Query</button>
+        </div>
+        {% endif %}
+    </form>
+
+    {% if chart %}
+        <div class="result">{{ chart|safe }}</div>
+    {% endif %}
+    {% if result %}
+        <div class="result">{{ result }}</div>
+    {% endif %}
+
+    <script>
+        let recognition;
+        function startVoice() {
+            recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.onresult = function(event) {
+                document.getElementById('queryInput').value = event.results[0][0].transcript;
+            };
+            recognition.start();
+        }
+    </script>
+</body>
+</html>
